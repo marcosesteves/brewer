@@ -12,13 +12,13 @@ public class AppInitializer extends AbstractAnnotationConfigDispatcherServletIni
 	}
 
 	@Override
-	protected Class<?>[] getServletConfigClasses() { // um array com um Class de uma classe qualquer que informa ao Spring como achar os Controllers
+	protected Class<?>[] getServletConfigClasses() { // um array com um Class de uma classe de Configuração que informa ao Spring como achar os Controllers
 		return new Class<?>[] { WebConfig.class };
 	}
 
 	@Override
 	protected String[] getServletMappings() {
-		return new String[] { "/" };
+		return new String[] { "/" }; // com a "/" Qualquer requisição a partir do Contexto será encaminhada para o DispatcherServlet 
 	}
 
 }
