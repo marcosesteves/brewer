@@ -7,14 +7,14 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 public class Cerveja {
 
-	@NotBlank
+	@NotBlank(message = "SKU é obrigatório")
 	private String sku;
 	
 	@NotEmpty(message = "O nome é obrigatório")
 	private String nome;
 	
-	@NotEmpty
-	@Size(min = 8, max = 30)
+	@NotEmpty(message = "A descriçã é obrigatória")
+	@Size(min = 1, max = 50, message = "O tamanho da descrição deve estar entre 1 e 50")
 	private String descricao;
 	
 	public String getDescricao() {
