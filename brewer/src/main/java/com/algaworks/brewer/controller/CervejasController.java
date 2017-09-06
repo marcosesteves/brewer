@@ -16,7 +16,7 @@ public class CervejasController {
 
 	@RequestMapping("/cervejas/novo")
 //	public String novo(Model model) { Usando o Model
-	public String novo(Cerveja cerveja) {  // Pode não definir o Model que o Spring reconhece que um objeto cerveja deve ser criado e passado a view;
+	public String novo(Cerveja cerveja) {  // Pode não definir o Model que o Spring reconhece que um objeto cerveja deve ser criado e retornado a view;
 //		model.addAttribute("outroNome", new Cerveja()); ---> Caso fosse usar um nome de obj diferente da classe a ser passado no Model
 //		model.addAttribute(new Cerveja());  ---> Usando o Model
 		return "cerveja/CadastroCerveja";
