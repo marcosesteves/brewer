@@ -8,6 +8,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.spring4.SpringTemplateEngine;
@@ -15,7 +16,10 @@ import org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ITemplateResolver;
+
 import com.algaworks.brewer.controller.CervejasController;
+
+import nz.net.ultraq.thymeleaf.LayoutDialect;
 
 @Configuration
 @ComponentScan(basePackageClasses = { CervejasController.class }) // Poderia ser passado uma String com o pacote onde se encontra a classe responsável pelos Controllers (com a anotação Controller). Como opção pode-se passar o atributo BasePackageClass um array com o(s) .class da(s) classe(s) de onde o pacote poderá ser recuperado
@@ -41,7 +45,8 @@ public class WebConfig extends WebMvcConfigurerAdapter implements ApplicationCon
 	public TemplateEngine templateEngine() { // Engine capaz de processar as Views com dados feito pelo Thymeleaf (conversao das tags th:...)
 		SpringTemplateEngine engine = new SpringTemplateEngine();
 		engine.setEnableSpringELCompiler(true);
-		engine.setTemplateResolver(templateResolver());  // Precisa do ITemplateResolver 
+		engine.setTemplateResolver(templateResolver());  // Precisa do ITemplateResolver
+		engine.addDialect(new LayoutDialect());  // Adiciona a classe do Thymeleaf LayoutDialect para o uso de templates nas Views
 		return engine;
 	}
 
@@ -53,5 +58,10 @@ public class WebConfig extends WebMvcConfigurerAdapter implements ApplicationCon
 		resolver.setTemplateMode(TemplateMode.HTML); // Informa o tipo das Views ao ViewResolver
 		return resolver;
 	}
+	
+	@Override
+	public void addResourceHandlers(ResourceHandlerRegistry registry) {  // Metodo para informar onde estão os recursos que não estão mapeados pelo controller como css, javascript, imagens ... 
+		registry.addResourceHandler("/**").addResourceLocations("classpath:/static/");
+}
 
 }
