@@ -3,7 +3,9 @@
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorator="layout/LayoutPadrao">
-	
+<head>
+	<title>Cadastro de Cerveja</title>
+</head>
 
 
 <body>
@@ -53,7 +55,7 @@
 								<option value="1">Pale lager</option>
 							</select>
 							<div class="bw-field-action_icon">
-								<a href="#">
+								<a href="#" data-toggle="modal" data-target="#ModalCadastroRapidoEstilo"> <!-- Chama o formulário modal abaixo pelo id -->
 									<i class="glyphicon glyphicon-plus-sign bw-glyphicon-large"></i>
 								</a>
 							</div>
@@ -120,5 +122,6 @@
 		
 			</form>
 		</div>
+		<div th:replace="estilo/CadastroRapidoEstilo :: modal"></div> <!-- Insere o formulário modal aqui -->
 	</section>
 </html>
