@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+<Configuration status="WARN">
+	<Appenders>
+		<Console name="Console" target="SYSTEM_OUT"> <!--  Saída para console -->
+			<PatternLayout pattern="%d{HH:mm:ss.SSS} %-5level %logger{36}: %msg%n" /> <!-- Configuração da saida do log hora nivel e msg -->
+		</Console>
+	</Appenders>
+	
+	<Loggers>
+		<Logger name="com.algaworks.brewer.controller" level="error"/> <!-- exibir apenas log das classes no pacote controller que possuam nível error -->
+	
+		<Root level="error"> <!-- Em qualquer parte da aplicação exibir o log de nível error -->
+			<AppenderRef ref="Console" />
+		</Root>
+	</Loggers>
+</Configuration>

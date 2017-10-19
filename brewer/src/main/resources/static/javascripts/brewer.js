@@ -5,3 +5,8 @@ $(function() {
 	var plain = $('.js-plain');  // idem
 	plain.maskMoney({ precision: 0 });
 });
+/*
+$(function() {
+	$('.js-status').bootstrapSwitch();
+});
+*/

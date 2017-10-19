@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org"
+	layout:decorator="'layout/LayoutPadrao'">
+
+<head>
+	<title>Cadastro de estilo</title>
+</head>
+
+<section layout:fragment="conteudo">
+
+	<div class="page-header">
+		<div class="container-fluid">
+			<h1>
+				Cadastro de estilo
+			</h1>
+		</div>
+	</div>
+	
+	<div class="container-fluid">
+		<form>
+			<div class="row">
+				<div class="col-sm-8  form-group">
+						<label for="nome">Nome</label>
+						<input id="nome" type="text" class="form-control"/>
+					</div>
+			</div>
+			<button type="submit" class="btn  btn-primary">Salvar</button>
+		</form>
+	</div>
+</section>
+
+</html>
