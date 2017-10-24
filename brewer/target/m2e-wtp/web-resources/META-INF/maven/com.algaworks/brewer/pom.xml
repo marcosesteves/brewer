@@ -32,22 +32,30 @@
 
 		<!-- Bean Validation / Usando o Hibernate Validator -->
 		<hibernate-validator.version>5.2.4.Final</hibernate-validator.version>
-		
-		<!-- Thymeleaf - Layout Dialect / Para usar templates nas páginas com o Thymeleaf. Esse pluin já disponibiliza o JQuery-->
+
+		<!-- Thymeleaf - Layout Dialect / Para usar templates nas páginas com o 
+			Thymeleaf. Esse pluin já disponibiliza o JQuery -->
 		<thymeleaf-layout-dialect.version>2.0.0</thymeleaf-layout-dialect.version>
-		
-		<!-- Logging / Para adicionar o SLF4J e LOG4J2 para log ao invés do padrao do Spring que é o commoms log  -->
+
+		<!-- Logging / Para adicionar o SLF4J e LOG4J2 para log ao invés do padrao 
+			do Spring que é o commoms log -->
 		<log4j.version>2.6</log4j.version>
 		<jcl-over-slf4j.version>1.7.21</jcl-over-slf4j.version>
-		
+
 		<!-- JPA / Hibernate -->
 		<hibernate.version>5.2.11.Final</hibernate.version>
 
+		<!-- Postgresql-driver-version -->
+		<postgresql.version>42.1.4</postgresql.version>
+
+		<!-- Flyway-maven-plugin-version -->
+		<flyway-maven-plugin.version>4.0.2</flyway-maven-plugin.version>
 
 	</properties>
 
 	<build>
 		<plugins>
+		
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>${maven-compiler-pluging.version}</version>
@@ -56,6 +64,17 @@
 					<target>${java.version}</target>
 				</configuration>
 			</plugin>
+	
+		<!-- Flyway Migration -->
+			<plugin>
+				<groupId>org.flywaydb</groupId>
+				<artifactId>flyway-maven-plugin</artifactId>
+				<version>${flyway-maven-plugin.version}</version>
+				<configuration>
+					<driver>org.postgresql.Driver</driver>
+				</configuration>
+			</plugin>
+			
 		</plugins>
 	</build>
 
@@ -79,7 +98,7 @@
 			<artifactId>spring-webmvc</artifactId>
 			<exclusions>
 				<exclusion>
-					<groupId>commons-logging</groupId>   <!--  Log a ser retirado das dependências -->
+					<groupId>commons-logging</groupId>   <!-- Log a ser retirado das dependências -->
 					<artifactId>commons-logging</artifactId>
 				</exclusion>
 			</exclusions>
@@ -119,11 +138,11 @@
 
 		<!-- Thymeleaf - Layout Dialect -->
 		<dependency>
-    		<groupId>nz.net.ultraq.thymeleaf</groupId>
-    		<artifactId>thymeleaf-layout-dialect</artifactId>
-    		<version>${thymeleaf-layout-dialect.version}</version>
+			<groupId>nz.net.ultraq.thymeleaf</groupId>
+			<artifactId>thymeleaf-layout-dialect</artifactId>
+			<version>${thymeleaf-layout-dialect.version}</version>
 		</dependency>
-		
+
 		<!-- Logging -->
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
@@ -145,14 +164,23 @@
 			<artifactId>jcl-over-slf4j</artifactId>
 			<version>${jcl-over-slf4j.version}</version>
 		</dependency>
-		
+
 		<!-- JPA / Hibernate -->
 		<dependency>
-    		<groupId>org.hibernate</groupId>
-    		<artifactId>hibernate-core</artifactId>
-    		<version>5.2.11.Final</version>
-    		<scope>compile</scope>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>5.2.11.Final</version>
+			<scope>compile</scope>
 		</dependency>
+
+		<!-- Postgresql  -->
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>${postgresql.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
 
 
 	</dependencies>
