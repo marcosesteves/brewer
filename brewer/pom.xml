@@ -22,7 +22,7 @@
 		<maven-compiler-pluging.version>3.2</maven-compiler-pluging.version> <!-- Versão do Maven -->
 
 		<!-- Spring MVC -->
-		<spring-framework.version>4.3.10.RELEASE</spring-framework.version> <!-- Versão do Spring -->
+		<spring-framework.version>4.3.0.RELEASE</spring-framework.version> <!-- Versão do Spring -->
 
 		<!-- Servlet API -->
 		<servlet.version>3.1.0</servlet.version>
@@ -43,13 +43,16 @@
 		<jcl-over-slf4j.version>1.7.21</jcl-over-slf4j.version>
 
 		<!-- JPA / Hibernate -->
-		<hibernate.version>5.2.11.Final</hibernate.version>
+		<hibernate.version>5.1.0.Final</hibernate.version>
 
 		<!-- Postgresql-driver-version -->
 		<postgresql.version>42.1.4</postgresql.version>
 
 		<!-- Flyway-maven-plugin-version -->
 		<flyway-maven-plugin.version>4.0.2</flyway-maven-plugin.version>
+		
+		<!-- Spring-Data JPA version -->
+		<spring-data-jpa.version>1.10.2.RELEASE</spring-data-jpa.version>
 
 	</properties>
 
@@ -168,8 +171,8 @@
 		<!-- JPA / Hibernate -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-core</artifactId>
-			<version>5.2.11.Final</version>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>${hibernate.version}</version> <!-- 5.2.11 -->
 			<scope>compile</scope>
 		</dependency>
 
@@ -181,8 +184,26 @@
 			<scope>provided</scope>
 		</dependency>
 
-
+		<!-- Spring Data JPA -->
+		<dependency>
+        	<groupId>org.springframework.data</groupId>
+        	<artifactId>spring-data-jpa</artifactId>
+        	<version>${spring-data-jpa.version}</version>
+    	</dependency>
 
 	</dependencies>
+	
 
+<!--  Usado para a versao 2.0.0.RELEASE DO SPRING DATA JPA  
+	<repositories>
+    	<repository>
+        	<id>spring-libs-release</id>
+        	<name>Spring Releases</name>
+        	<url>https://repo.spring.io/libs-release</url>
+        	<snapshots>
+            	<enabled>false</enabled>
+        	</snapshots>
+    	</repository>
+	</repositories>
+-->
 </project>
