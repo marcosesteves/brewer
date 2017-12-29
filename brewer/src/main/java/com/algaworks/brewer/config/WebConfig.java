@@ -6,6 +6,10 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.convert.converter.Converter;
+import org.springframework.format.support.DefaultFormattingConversionService;
+import org.springframework.format.support.FormattingConversionService;
+import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -18,6 +22,8 @@ import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ITemplateResolver;
 
 import com.algaworks.brewer.controller.CervejasController;
+import com.algaworks.brewer.controller.converter.EstiloConverter;
+import com.algaworks.brewer.model.Estilo;
 
 import nz.net.ultraq.thymeleaf.LayoutDialect;
 
@@ -29,7 +35,7 @@ public class WebConfig extends WebMvcConfigurerAdapter implements ApplicationCon
 	private ApplicationContext applicationContext;
 
 	@Override
-	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException { // Metodo que retorna o ApplicationContext
+	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException { // Metodo que disponibiliza o ApplicationContext na classe WebConfig
 		this.applicationContext = applicationContext;
 	}
 
@@ -45,7 +51,7 @@ public class WebConfig extends WebMvcConfigurerAdapter implements ApplicationCon
 	public TemplateEngine templateEngine() { // Engine capaz de processar as Views com dados feito pelo Thymeleaf (conversao das tags th:...)
 		SpringTemplateEngine engine = new SpringTemplateEngine();
 		engine.setEnableSpringELCompiler(true);
-		engine.setTemplateResolver(templateResolver());  // Precisa do ITemplateResolver
+		engine.setTemplateResolver(templateResolver());  // Precisa do TemplateResolver
 		engine.addDialect(new LayoutDialect());  // Adiciona a classe do Thymeleaf LayoutDialect para o uso de templates nas Views
 		return engine;
 	}
@@ -62,6 +68,41 @@ public class WebConfig extends WebMvcConfigurerAdapter implements ApplicationCon
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {  // Metodo para informar onde estão os recursos que não estão mapeados pelo controller como css, javascript, imagens ... 
 		registry.addResourceHandler("/**").addResourceLocations("classpath:/static/");
-}
+	}
+	
+	@Bean
+	public FormattingConversionService mvcConversionService() {   // Utilizado para registrar no Spring um Converter que é usado para converter um tipo em outro automaticamente pelo Spring -- O método tem que ter esse nome --
+		DefaultFormattingConversionService conversionService = new DefaultFormattingConversionService();
+		conversionService.addConverter(new EstiloConverter());  // Sem Lambda
+		return conversionService;
+		
+		// ??????? Não sei porque não funciona!!!
+/*		Converter<String, Estilo> conversor = ( String codigo ) -> {
+			if (!StringUtils.isEmpty(codigo)) {
+				Estilo estilo = new Estilo();
+				estilo.setCodigo(Long.valueOf(codigo));
+				return estilo;
+			}
+			return null;
+		};
+		conversionService.addConverter(conversor);
+		return conversionService;
+	}
+*/	
 
+/*		
+		conversionService.addConverter(codigo -> 
+		{
+			if (!StringUtils.isEmpty(codigo)) {
+				Estilo estilo = new Estilo();
+				estilo.setCodigo(Long.valueOf((String)codigo));
+				return estilo;
+			}
+			
+			return null;
+		});
+		return conversionService;
+	}
+*/
+	}
 }

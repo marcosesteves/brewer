@@ -5,17 +5,19 @@ import javax.servlet.Filter;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
+import com.algaworks.brewer.config.JPAConfig;
+import com.algaworks.brewer.config.ServiceConfig;
 import com.algaworks.brewer.config.WebConfig;
 
-public class AppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
+public class AppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {  // As anotações @Configuration devem ser declaradas aqui
 
-	@Override
-	protected Class<?>[] getRootConfigClasses() {
-		return null;
+	@Override // Configurações para localização de Beans  que devem estar disponíveis para os servlets 
+	protected Class<?>[] getRootConfigClasses() { // um array com um objeto Class de uma classe de Configuração que informa ao Spring como achar Entidades e Controllers
+		return new Class<?>[] { JPAConfig.class, ServiceConfig.class };  // Para o Spring encontrar as classes de configuração. Ele extrai informações de localização do .class das classes *Configuration
 	}
 
-	@Override
-	protected Class<?>[] getServletConfigClasses() { // um array com um Class de uma classe de Configuração que informa ao Spring como achar os Controllers
+	@Override  // Configurações de Beans que envolvem Web como servlets
+	protected Class<?>[] getServletConfigClasses() { // um array com um objeto Class de uma classe de Configuração que informa ao Spring como achar Entidades e Controllers
 		return new Class<?>[] { WebConfig.class };
 	}
 

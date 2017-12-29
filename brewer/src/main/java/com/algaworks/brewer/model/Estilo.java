@@ -14,6 +14,15 @@ public class Estilo {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long codigo;
+	
+	public Long getCodigo() {
+		return codigo;
+	}
+
+	public void setCodigo(Long codigo) {
+		this.codigo = codigo;
+	}
+
 	private String nome;
 	
 	@OneToMany(mappedBy = "estilo")

@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE xml>
-<Configuration status="WARN">
-	<Appenders>
-		<Console name="Console" target="SYSTEM_OUT"> <!--  Saída para console -->
-			<PatternLayout pattern="%d{HH:mm:ss.SSS} %-5level %logger{36}: %msg%n" /> <!-- Configuração da saida do log hora nivel e msg -->
+<Configuration status="WARN"> <!-- status="WARN" Para exibir o que está sendo rastreado pelo log. Verifica erros do próprio log4j  -->
+	<Appenders> <!-- Onde se diz para onde deve ser enviado os logers -->
+		<Console name="Console" target="SYSTEM_OUT"> <!-- Neste caso para o console com a configuração de hora descrita abaixo -->
+		
+			<PatternLayout pattern="%d{HH:mm:ss.SSS} %-5level %logger{36}: %msg%n" /> <!-- Mostra hora, nível do erro, a classe com 36 caracteres e a mensagem do erro  -->
+			
 		</Console>
 	</Appenders>
 	
 	<Loggers>
-		<Logger name="com.algaworks.brewer.controller" level="error"/> <!-- exibir apenas log das classes no pacote controller que possuam nível error -->
+		<Logger name="com.algaworks.brewer.controller" level="error"/> <!-- Especifica que somente as classes do pacote controller terá nível INFO -->
+		
+		<Logger name="org.hibernate.SQL" level="debug"/>
 	
-		<Root level="error"> <!-- Em qualquer parte da aplicação exibir o log de nível error -->
+		<Root level="error"> <!-- Root é para toda a aplicação e o nível "error" captura tudo com os níveis fatal e error -->
 			<AppenderRef ref="Console" />
 		</Root>
 	</Loggers>

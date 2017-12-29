@@ -8,14 +8,14 @@ public enum Sabor {
 	FRUTADA("Frutada"),
 	SUAVE("Suave");
 	
-	private String sabor;
+	private String descricao;
 	
-	Sabor(String sabor) {
-		this.sabor = sabor;
+	Sabor(String descricao) {
+		this.descricao = descricao;
 	}
 	
-	public String getSabor() {
-		return sabor;
+	public String getDescricao() {
+		return descricao;
 	}
 	
 }

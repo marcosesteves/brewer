@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE xml>
+		<!-- É necessário ter os seguintes arquivos jar na pasta lib do tomcat c3p0, mchange-commons e postgresql -->
 <Context>
 <!-- Configuração do Data Source para uso com o Spring JPA -->
     <Resource name="jdbc/brewerDB" auth="Container" 
